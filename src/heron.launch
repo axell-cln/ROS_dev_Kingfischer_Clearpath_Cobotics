@@ -1,0 +1,18 @@
+<launch>
+
+  <!-- Use the D pad while pressing and holding the left trigger button (5) to control. -->
+  <node pkg="test_rl" type="heron_lidar_to_goal.py" name="heron_lidar_to_goal" output="screen">
+    <!-- subscribed topics -->
+    <remap from="~scan" to="/lidar/scan_throttle"/>
+    <!-- published topics -->  
+    <remap from="~goalFromLidar" to="/goal_from_lidar"/>    
+  </node>
+
+  <node pkg="test_rl" type="heron_go_to.py" name="heron_go_to" output="screen">
+    <!-- subscribed topics -->
+    <remap from="~goalFromLidar" to="/goal_from_lidar"/>
+    <!-- published topics -->  
+    <remap from="~cmd_boat" to="/cmd_vel"/>
+  </node>
+
+</launch>
